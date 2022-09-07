@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block body %}
+<form action="/pdfdownloader" method="POST">
+    <div class="form-group">
+      <label for="pdfdownloader">Download All PDFs</label>
+      <input type="text" class="form-control" id="pdfdownloader" name="pdfdownloader" placeholder="Download All PDFs">
+      <button class="btn btn-primary" style="margin-top:5px">Download All</button>
+    </div>
+</form>
+{% endblock body %}

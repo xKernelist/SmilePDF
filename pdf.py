@@ -7,16 +7,32 @@ from bs4 import BeautifulSoup
 from zipfile import ZipFile
 
 def downloadAll(url):
-    folder_location = r'C:\pdfs'
+    folder_location = r'C:\Users\sefa\Desktop\workspace\smilePDFweb\static\downloadAll'
     if not os.path.exists(folder_location):os.mkdir(folder_location)
     
     response = requests.get(url)
     soup= BeautifulSoup(response.text, "html.parser") 
-    
+    x=1
     for link in soup.select("a[href$='.pdf']"):
-        filename = os.path.join(folder_location,link['href'].split('/')[-1])
+        #filename = os.path.join(folder_location,link['href'].split('/')[-1])
+        filename = os.path.join(folder_location,str(x)+".pdf")
+        x+=1
+
         with open(filename, 'wb') as f:
             f.write(requests.get(urljoin(url,link['href'])).content)
+
+    zipobj = ZipFile(f"./static/downloadAll/0.zip","w")
+    for i in range(len(os.listdir("./static/downloadAll"))):
+        if i == len(os.listdir("./static/downloadAll"))-1:
+            break
+        else:
+            zipobj.write(f"./static/downloadAll/{i+1}.pdf")
+        
+    # for i in dosya
+    #zipobj.write(f"./static/{directory}/first_page.pdf")
+    #zipobj.write(f"./static/{directory}/second_page.pdf")
+    zipobj.close()
+    
 
 def pdf_printer(pdf,directory):
 
