@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class="pdf_printer">
+    <h2>SmilePDF PDF optimizer for double-sided printing<hr></h2>
+    <form action="/pdfprinter" method="POST"  enctype="multipart/form-data">
+        <div class="custom-file">
+            {{form.file()}}
+            {{form.submit()}}
+        </div>
+      </form>
+    
+</div>
+{% endblock body %}
